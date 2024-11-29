@@ -71,9 +71,11 @@ public class StudentFees {
     }
 
     public void viewStudentFees() {
-        String query = "SELECT * FROM student_fee";
-        String[] headers = {"ID", "Student ID", "Fee ID", "Payment Date", "Status"};
-        String[] columns = {"id", "student_id", "fee_id", "payment_date", "status"};
+        String query = "SELECT student_fee.id, name, amount, payment_date, status FROM student_fee "
+                + "INNER JOIN fee ON fee_id = fee.id "
+                + "INNER JOIN student ON student_id = student.id";
+        String[] headers = {"ID", "Student Name", "Amount", "Payment Date", "Status"};
+        String[] columns = {"id", "name", "amount", "payment_date", "status"};
 
         conf.viewRecords(query, headers, columns);
     }
